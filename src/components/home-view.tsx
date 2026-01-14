@@ -45,18 +45,18 @@ function WeatherIcon({ condition }: { condition: string }) {
   switch (condition.toLowerCase()) {
     case 'rain':
     case 'rainy':
-      return <CloudRain className="h-12 w-12" />;
+      return <CloudRain className="h-8 w-8" />;
     case 'sun':
     case 'sunny':
-      return <Sun className="h-12 w-12" />;
+      return <Sun className="h-8 w-8" />;
     default:
-      return <Cloud className="h-12 w-12" />;
+      return <Cloud className="h-8 w-8" />;
   }
 }
 
 function GlassPanel({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={`rounded-2xl bg-white/90 dark:bg-neutral-900/90 backdrop-blur-sm border border-neutral-200/50 dark:border-neutral-800/50 shadow-sm ${className}`}>
+    <div className={`rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 ${className}`}>
       {children}
     </div>
   );
@@ -66,59 +66,57 @@ export function HomeView() {
   const [weather] = useState<WeatherData>(mockWeather);
 
   return (
-    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 pb-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 pb-6">
       {/* Header */}
-      <div className="px-8 pt-16 pb-8">
-        <h1 className="text-4xl font-light text-neutral-900 dark:text-neutral-50 tracking-tight">{weather.location}</h1>
-        <p className="text-neutral-500 dark:text-neutral-400 text-sm mt-2">{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
+      <div className="px-6 pt-12 pb-6">
+        <h1 className="text-4xl font-thin text-white">{weather.location}</h1>
+        <p className="text-white/70 text-sm mt-1">{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
       </div>
 
       {/* Current Weather */}
-      <div className="px-8 mb-8">
-        <GlassPanel className="p-10">
+      <div className="px-6 mb-6">
+        <GlassPanel className="p-8">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-8xl font-extralight text-neutral-900 dark:text-neutral-50 mb-3">{weather.temp}°</div>
-              <div className="text-neutral-700 dark:text-neutral-300 text-lg mb-2">{weather.condition}</div>
-              <div className="text-neutral-500 dark:text-neutral-500 text-sm">H:{weather.high}° L:{weather.low}°</div>
+              <div className="text-7xl font-thin text-white mb-2">{weather.temp}°</div>
+              <div className="text-white/80 text-xl">{weather.condition}</div>
+              <div className="text-white/60 text-sm mt-2">H:{weather.high}° L:{weather.low}°</div>
             </div>
-            <div className="text-neutral-400 dark:text-neutral-600">
-              <WeatherIcon condition={weather.condition} />
-            </div>
+            <WeatherIcon condition={weather.condition} />
           </div>
         </GlassPanel>
       </div>
 
       {/* Weather Details */}
-      <div className="px-8 mb-8">
-        <GlassPanel className="p-8">
-          <div className="grid grid-cols-2 gap-6">
-            <div className="flex items-center space-x-4">
-              <Droplets className="h-5 w-5 text-neutral-400 dark:text-neutral-600" />
+      <div className="px-6 mb-6">
+        <GlassPanel className="p-6">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="flex items-center space-x-3">
+              <Droplets className="h-5 w-5 text-white/70" />
               <div>
-                <div className="text-neutral-500 dark:text-neutral-500 text-xs uppercase tracking-wide">Humidity</div>
-                <div className="text-neutral-900 dark:text-neutral-100 text-xl font-light">{weather.humidity}%</div>
+                <div className="text-white/60 text-xs">Humidity</div>
+                <div className="text-white text-lg">{weather.humidity}%</div>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <Wind className="h-5 w-5 text-neutral-400 dark:text-neutral-600" />
+            <div className="flex items-center space-x-3">
+              <Wind className="h-5 w-5 text-white/70" />
               <div>
-                <div className="text-neutral-500 dark:text-neutral-500 text-xs uppercase tracking-wide">Wind</div>
-                <div className="text-neutral-900 dark:text-neutral-100 text-xl font-light">{weather.windSpeed} mph</div>
+                <div className="text-white/60 text-xs">Wind</div>
+                <div className="text-white text-lg">{weather.windSpeed} mph</div>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <Eye className="h-5 w-5 text-neutral-400 dark:text-neutral-600" />
+            <div className="flex items-center space-x-3">
+              <Eye className="h-5 w-5 text-white/70" />
               <div>
-                <div className="text-neutral-500 dark:text-neutral-500 text-xs uppercase tracking-wide">Visibility</div>
-                <div className="text-neutral-900 dark:text-neutral-100 text-xl font-light">{weather.visibility} mi</div>
+                <div className="text-white/60 text-xs">Visibility</div>
+                <div className="text-white text-lg">{weather.visibility} mi</div>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <Gauge className="h-5 w-5 text-neutral-400 dark:text-neutral-600" />
+            <div className="flex items-center space-x-3">
+              <Gauge className="h-5 w-5 text-white/70" />
               <div>
-                <div className="text-neutral-500 dark:text-neutral-500 text-xs uppercase tracking-wide">Pressure</div>
-                <div className="text-neutral-900 dark:text-neutral-100 text-xl font-light">{weather.pressure} mb</div>
+                <div className="text-white/60 text-xs">Pressure</div>
+                <div className="text-white text-lg">{weather.pressure} mb</div>
               </div>
             </div>
           </div>
@@ -126,22 +124,20 @@ export function HomeView() {
       </div>
 
       {/* 7-Day Forecast */}
-      <div className="px-8">
-        <h2 className="text-neutral-900 dark:text-neutral-50 text-lg font-light mb-4 tracking-tight">7-Day Forecast</h2>
-        <GlassPanel className="p-6">
-          <div className="space-y-0">
+      <div className="px-6">
+        <h2 className="text-white text-lg font-light mb-3">7-Day Forecast</h2>
+        <GlassPanel className="p-4">
+          <div className="space-y-3">
             {weather.forecast.map((day, idx) => (
-              <div key={idx} className="flex items-center justify-between py-4 border-b border-neutral-200/50 dark:border-neutral-800/50 last:border-0">
-                <div className="text-neutral-900 dark:text-neutral-100 w-14 text-sm font-light">{day.day}</div>
-                <div className="flex items-center space-x-4 flex-1">
-                  <div className="text-neutral-400 dark:text-neutral-600">
-                    <WeatherIcon condition={day.icon} />
-                  </div>
-                  <div className="text-neutral-600 dark:text-neutral-400 text-sm flex-1">{day.condition}</div>
+              <div key={idx} className="flex items-center justify-between py-2 border-b border-white/10 last:border-0">
+                <div className="text-white w-12">{day.day}</div>
+                <div className="flex items-center space-x-3 flex-1">
+                  <WeatherIcon condition={day.icon} />
+                  <div className="text-white/70 text-sm flex-1">{day.condition}</div>
                 </div>
-                <div className="text-neutral-900 dark:text-neutral-100 text-sm font-light">
-                  <span>{day.high}°</span>
-                  <span className="text-neutral-400 dark:text-neutral-600 ml-3">{day.low}°</span>
+                <div className="text-white text-sm">
+                  <span className="font-semibold">{day.high}°</span>
+                  <span className="text-white/60 ml-2">{day.low}°</span>
                 </div>
               </div>
             ))}
